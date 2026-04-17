@@ -1,6 +1,3 @@
-/*
- * Maze Solver - Flood Fill Robot Brain
- */
 
 #include "maze.h"
 #include "robot.h"
