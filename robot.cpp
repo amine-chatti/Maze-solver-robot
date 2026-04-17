@@ -165,11 +165,6 @@ void printEncoderStatus() {
     Serial.println(error);
 }
 
-void setTargetGain(float kp) {
-    // This function can be used to update the KP_STRAIGHT gain at runtime if needed.
-    // However, since KP_STRAIGHT is defined as a macro, we would need to change it to a variable to allow this.
-    // For now, this is just a placeholder to show where you would implement dynamic gain adjustment.
-}
 
 // ============================================================================
 // TURN FUNCTIONS
