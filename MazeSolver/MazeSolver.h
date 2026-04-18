@@ -1,7 +1,7 @@
 #ifndef MAZE_H
 #define MAZE_H
 
-#define N 16
+#define N 7
 
 // Directions
 #define NORTH 0
