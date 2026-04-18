@@ -1,4 +1,4 @@
-#include "maze.h"
+#include "MazeSolver.h"
 #include "robot.h"
 
 // ----------------------------
@@ -71,25 +71,38 @@ void floodFill(int gx, int gy) {
 
 // ----------------------------
 // SENSOR WALL UPDATE
-// (YOU MUST CONNECT ULTRASONIC HERE)
 // ----------------------------
 void updateWalls() {
 
+    const int dx[4] = {-1, 0, 1, 0};
+    const int dy[4] = {0, 1, 0, -1};
+
+    auto setWallBothSides = [&](int cx, int cy, int d) {
+        walls[cx][cy][d] = true;
+
+        int nx = cx + dx[d];
+        int ny = cy + dy[d];
+        if (nx >= 0 && ny >= 0 && nx < N && ny < N) {
+            int opposite = (d + 2) % 4;
+            walls[nx][ny][opposite] = true;
+        }
+    };
+
     // FRONT WALL
     if (wallFront()) {
-        walls[x][y][dir] = true;
+        setWallBothSides(x, y, dir);
     }
 
     // LEFT WALL
     int leftDir = (dir + 3) % 4;
     if (wallLeft()) {
-        walls[x][y][leftDir] = true;
+        setWallBothSides(x, y, leftDir);
     }
 
     // RIGHT WALL
     int rightDir = (dir + 1) % 4;
     if (wallRight()) {
-        walls[x][y][rightDir] = true;
+        setWallBothSides(x, y, rightDir);
     }
 }
 

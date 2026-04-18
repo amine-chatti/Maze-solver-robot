@@ -14,6 +14,16 @@
 #define ENC_RIGHT_A 3
 #define ENC_RIGHT_B A3
 
+// ULTRASONIC (HC-SR04)
+#define US_FRONT_TRIG 7
+#define US_FRONT_ECHO 8
+
+#define US_LEFT_TRIG  A6
+#define US_LEFT_ECHO  A5
+
+#define US_RIGHT_TRIG A1
+#define US_RIGHT_ECHO A2
+
 #define MAX_SPEED 255
 #define MIN_SPEED 50
 
@@ -22,6 +32,7 @@ extern int TICKS_PER_CELL;
 extern int BASE_SPEED;
 extern float KP_STRAIGHT;
 extern int TICKS_PER_90DEG_TURN;  // Ticks for 90 degree turn
+extern int WALL_THRESHOLD_CM;
 
 // FUNCTIONS
 void robotInit();
@@ -34,6 +45,7 @@ void motorStop();
 void driveStraight(int baseSpeed);
 void turnLeft(int speed);
 void turnRight(int speed);
+void moveToDirection(int nextDir);
 
 void leftEncoderISR();
 void rightEncoderISR();
@@ -42,5 +54,8 @@ long getLeftTicks();
 long getRightTicks();
 void printEncoderStatus();
 
-void setKp(float kp);
+long readUltrasonicCM(uint8_t trigPin, uint8_t echoPin);
+bool wallFront();
+bool wallLeft();
+bool wallRight();
 #endif // ROBOT_H
